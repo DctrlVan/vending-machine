@@ -1,0 +1,19 @@
+{
+  "name": "bbtm",
+  "version": "1.0.0",
+  "description": "full node Beer Bitcoin Teller Machine",
+  "main": "server.coffee",
+  "dependencies": {
+    "body-parser": "^1.13.2",
+    "express": "^4.13.1",
+    "onoff": "^1.0.2",
+    "request": "^2.58.0",
+    "winston": "^1.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
