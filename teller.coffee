@@ -16,41 +16,42 @@ products = require './products.coffee'
 productData = {}
 for product in products
   productData[product.address] =
-    gpioPin:product.gpioPin
     price:product.price
     floatTrigger:product.price - 5
     que:0
+    gpioPin:product.gpioPin
 
 # change this to energize pi pin
+count = 0
 beer = (pin)->
-  console.log "beered:#{pin}"
-  ### commented out until connected to pi
-  beered.write 1, (err)->
-    setTimeout ->
-      beered.write 0
-    , 5000
+  count++
+  console.log "beered:#{pin}:#{count}"
+  #commented out until connected to pi
+  #beered.write 1, (err)->
+  #  setTimeout ->
+  #    beered.write 0
+  #  , 5000
+###
   This is the place to implement tracking of inventory,
-  Probably can include it on the productData object, but
-  need to store in persistent memory so inentory levels
-  are not reset on reset.
-  ###
+  Can include it on the productData object, but
+  need to store figure out persistent storage 
+###
 
 pay = (payment,exRate)->
-  # if not already paid, and paid to an address we care about:
   if productData[payment.address]?
-    if payed_txid.indexOf payment.txid == -1
+    if ((payed_txid.indexOf payment.txid) == -1)
       payed_txid.push payment.txid
       productData[payment.address].floatTrigger -= parseInt payment.btc*exRate*100
       while productData[payment.address].floatTrigger <= 0
         productData[payment.address].floatTrigger += productData[payment.address].price
         productData[payment.address].que += 1
         if productData[payment.address].floatTrigger >= 0
-          queBeer(payment.address)
+          que(payment.address)
 
-queBeer = (address)->
+que = (address)->
   if inUse
     setTimeout ->
-      queBeer(address)
+      que(address)
     , 15555
   else
     inUse = true
@@ -65,7 +66,24 @@ queBeer = (address)->
           beer(productData[address].gpioPin)
         , 12345*i
       setTimeout ->
+        console.log ":::Payout Complete:::"
         inUse = false
       , 12345*i
 
 module.exports = {pay}
+
+### Explaination of pay and que functions :::
+- If paid to an address we care about & not already paid:
+- log the transaction id in payed_tx (to prevent double payments)
+- payment reduces trigger by value of payment.
+- From this reduced value, iterate up by the price
+    e.g. current trigger price $3,
+         $10 paid. -- new value negative $7
+         Negative 7 is passed to while loop which iterates up by the price:
+         -7 -> -4 -> -1 -> 2 ---Two is the new trigger (remembers overpayment)
+         Three loops will trigger three payouts (stored in .que variable)
+- On the last loop call que function.
+- Que checks if the teller is in use, if so it delays the call.
+- Otherwise it sets timed callbacks to trigger the payouts (every 12 seconds)
+- after 12 seconds per payout the teller inUse is returned to false
+###

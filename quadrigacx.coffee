@@ -9,7 +9,7 @@ getAvgCDN = (callback)->
 
 module.exports = { getAvgCDN }
 ###
-SAMPLE DATA RETURNED QUADRIGA:
+SAMPLE DATA RETURNED FROM QUADRIGA:
 vwap -> volume weighted average price
 {
   "high": "375.00",

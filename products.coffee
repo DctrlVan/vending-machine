@@ -1,6 +1,6 @@
 module.exports =[
   name:'beer'
-  address: "muBmBYFVNPu36rkqVTHQLfUybPvS2t8KCL"
+  address: "mhGxDcqDTVZf5tM696RYSm7RhsyfSqM12h"
   price : 300
   gpioPin: 14
 ,
