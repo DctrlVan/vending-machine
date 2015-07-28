@@ -5,7 +5,6 @@
   "main": "server.coffee",
   "dependencies": {
     "body-parser": "^1.13.2",
-    "bunyan": "^1.4.0",
     "express": "^4.13.1",
     "onoff": "^1.0.2",
     "request": "^2.58.0",
