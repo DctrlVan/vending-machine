@@ -21,10 +21,7 @@ setRate = (err,rate)->   #this is callback function
     CDNtoBTC = 380
   CDNtoBTC = rate
   logger.info "Rate updated: $#{rate}/btc"
-
-setInterval ->
-  exchange.getAvgCDN(setRate)
-, 777777 #update every~~13 minutes
+setInterval exchange.getAvgCDN(setRate), 777777 #update every~~13 minutes
 ###
 Ready a port to listen for payment details from the transaction script.
 The transaction script is called by walletnotify.sh,
