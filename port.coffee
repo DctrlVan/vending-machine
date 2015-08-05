@@ -16,9 +16,13 @@ periodically asking quadriga.
 exchange = require './quadrigacx.coffee'
 CDNtoBTC = 0
 setRate = (err,rate)->   #this is callback function
+  if err
+    logger.info "setting rate error: #{err}"
+    CDNtoBTC = 380
   CDNtoBTC = rate
   logger.info "Rate updated: $#{rate}/btc"
-setInterval exchange.getAvgCDN(setRate), 777777 #update every~~13 minutes
+exchange.getAvgCDN setRate
+setInterval exchange.getAvgCDN, 777777, setRate #update every~~13 minutes
 ###
 Ready a port to listen for payment details from the transaction script.
 The transaction script is called by walletnotify.sh,
