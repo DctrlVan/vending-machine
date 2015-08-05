@@ -16,6 +16,9 @@ periodically asking quadriga.
 exchange = require './quadrigacx.coffee'
 CDNtoBTC = 0
 setRate = (err,rate)->   #this is callback function
+  if err
+    logger.info "setting rate error: #{err}"
+    CDNtoBTC = 380   
   CDNtoBTC = rate
   logger.info "Rate updated: $#{rate}/btc"
 setInterval exchange.getAvgCDN(setRate), 777777 #update every~~13 minutes
