@@ -23,6 +23,7 @@ for product in products
 # change this to energize pi pin
 count = 0
 beer = (pin)->
+  console.log "beer called"
   beered = new gpio(pin,'out')
   beered.write 1, (err)->
     if err? then console.log err
