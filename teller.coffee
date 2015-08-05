@@ -1,6 +1,5 @@
 ### commented out until connected to pi ###
-#gpio = require('onoff').Gpio
-#beered = new gpio(11,'out')
+gpio = require('onoff').Gpio
 ### Utility / Config Variables ###
 
 inUse = false
@@ -24,19 +23,17 @@ for product in products
 # change this to energize pi pin
 count = 0
 beer = (pin)->
-  count++
-  console.log "beered:#{pin}:#{count}"
-  #commented out until connected to pi
-  #beered.write 1, (err)->
-  #  setTimeout ->
-  #    beered.write 0
-  #  , 5000
+  beered = new gpio(pin,'out')
+  beered.write 1, (err)->
+    if err? then console.log err
+    setTimeout ->
+      beered.write 0
+    , 5000
 ###
   This is the place to implement tracking of inventory,
   Can include it on the productData object, but
-  need to store figure out persistent storage 
+  need to store figure out persistent storage
 ###
-
 pay = (payment,exRate)->
   if productData[payment.address]?
     if ((payed_txid.indexOf payment.txid) == -1)
