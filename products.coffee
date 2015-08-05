@@ -7,7 +7,7 @@ module.exports =[
   name:'testing'
   address: "myo6ZxmG1oz3oLGtEvoAje4VDuBFoxrzQ9"
   price : 350
-  gpioPin: 5
+  gpioPin: 3
 ,
   name:'set-individual-prices-and-gpio-pins-here'
   address: "mgZJhBoXAwWsak2ht98pAZNBkwfJYPgWkJ"
