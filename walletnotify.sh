@@ -1,5 +1,5 @@
 #!/bin/bash
-dir=/home/decentral/Code/bbtm
+dir=/home/pi/bbtm
 log=$dir/log/transactions.txt
 echo transaction-id:${1} >> ${log}
 payment_script=$dir/transaction.coffee
