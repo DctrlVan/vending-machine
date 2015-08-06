@@ -25,7 +25,6 @@ count = 0
 beer = (pin)->
   console.log "beer called:: #{pin}"
   beered = new gpio(pin,'out')
-  console.log beered
   beered.write 1, (err)->
     if err? then console.log err
     setTimeout ->
