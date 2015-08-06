@@ -11,7 +11,6 @@ for out in transaction.vout
       txid:transaction.txid
       address:out.scriptPubKey.addresses[0]
       btc:out.value
-
 ###
 Example transaction passed to this file:
 { txid: '18b5c3a198d20a31417e925565bba974528d673858543719fa0e94431eb2f412',
