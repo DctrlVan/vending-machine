@@ -4,11 +4,11 @@ Install bitcoind.
 Target the walletnotify.sh script in the bitcoin.conf file.
 
 #### example /.bitcoin/bitcoin.conf:
-rpcuser=bitcoinrpc
-rpcpassword=EPas8odfh993fjdslihf329985kjfldkmfM5
-minrelaytxfee=0.00005
-limitfreerelay=5
-walletnotify=/home/decentral/Code/bbtm/walletnotify.sh %s
+rpcuser=bitcoinrpc      
+rpcpassword=EPas8odfh993fjdslihf329985kjfldkmfM5      
+minrelaytxfee=0.00005     
+limitfreerelay=5     
+walletnotify=/home/pi/bbtm/walletnotify.sh %s       
 
 The walletnotify.sh script also needs to be configured so the
 dir is targeting current directory (but calling pwd does not
