@@ -6,8 +6,10 @@ teller = require './teller.coffee'
 ###
 Log to log file, and console
 ###
-logger = require 'winston'
-logger.add logger.transports.File, filename: './log/main.log'
+logger = require('./log/logger.coffee').textLogger
+
+
+
 logger.info ':::starting up:::'
 ###
 Keep exchange rate up to date by
