@@ -1,8 +1,8 @@
 module.exports =[
   name:'CurrentATM'
   address: "16RyYkFi7fkqFD9KP6NdYcSsZj77EHABaf"
-  price : 300
-  gpioPin: 5
+  price : 300 
+  gpioPin: 17
 ,
   name:'testing'
   address: "myo6ZxmG1oz3oLGtEvoAje4VDuBFoxrzQ9"
