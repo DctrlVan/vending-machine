@@ -5,6 +5,8 @@ gpio = require('onoff').Gpio
 inUse = false
 payed_txid = []
 
+logger = require('./log/logger.coffee').textLogger
+
 ###
 Look in the products config file,
 create a holding variable to access by the btc address:
@@ -24,10 +26,10 @@ for product in products
 Trigger the gpio pin for 5 seconds:
 ###
 beer = (pin)->
-  console.log "beer called:: #{pin}"
+  logger.info "beer called:: #{pin}"
   beered = new gpio(pin,'out')
   beered.write 1, (err)->
-    if err? then console.log err
+    if err? then logger.info err
     setTimeout ->
       beered.write 0
     , 5000
@@ -79,7 +81,7 @@ que = (address)->
           beer(productData[address].gpioPin)
         , 12345*i
       setTimeout ->
-        console.log ":::Payout Complete:::"
+        logger.info ":::Payout Complete:::"
         inUse = false
       , 12345*i
 
