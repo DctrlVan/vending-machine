@@ -10,7 +10,7 @@ textLogger = new winston.Logger
       json:false
       formatter:textFormat
     new winston.transports.File
-      filename:"log/logs.txt"
+      filename:"/home/pi/log/logs.txt"
       json:false
       formatter:textFormat
   ]
