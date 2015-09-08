@@ -8,8 +8,6 @@ Log to log file, and console
 ###
 logger = require('./log/logger.coffee').textLogger
 
-
-
 logger.info ':::starting up:::'
 ###
 Keep exchange rate up to date by
@@ -24,7 +22,7 @@ setRate = (err,rate)->   #this is callback function
   CDNtoBTC = rate
   logger.info "Rate updated: $#{rate}/btc"
 exchange.getAvgCDN setRate
-setInterval exchange.getAvgCDN, 777777, setRate #update every~~13 minutes
+setInterval exchange.getAvgCDN, 7777777, setRate #update every~~13 minutes
 ###
 Ready a port to listen for payment details from the transaction script.
 The transaction script is called by walletnotify.sh,
@@ -38,5 +36,4 @@ server.listen 8888, (err)->
   server.post '/payment', (req,res)->
     res.send 'thanks'
     payment = req.body
-    logger.info "#{payment.btc}btc to #{payment.address}"
     teller.pay payment, CDNtoBTC

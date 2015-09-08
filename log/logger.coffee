@@ -17,9 +17,7 @@ textLogger = new winston.Logger
       formatter:textFormat
   ]
 
-sq = require "sqlite3"
-db = new sq.Database("log/log.db")
-
-
+#sq = require "sqlite3"
+#db = new sq.Database("log/log.db")
 
 module.exports = { textLogger }

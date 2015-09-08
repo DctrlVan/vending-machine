@@ -26,7 +26,7 @@ for product in products
 Trigger the gpio pin for 5 seconds:
 ###
 beer = (pin)->
-  logger.info "beer called:: #{pin}"
+  logger.info "dispensed with pin:#{pin}"
   beered = new gpio(pin,'out')
   beered.write 1, (err)->
     if err? then logger.info err
@@ -48,6 +48,7 @@ Explaination of pay and que functions :::
 ###
 pay = (payment,exRate)->
   if productData[payment.address]?
+    logger.info "#{payment.btc}btc to #{payment.address}"
     if ((payed_txid.indexOf payment.txid) == -1)
       payed_txid.push payment.txid
       productData[payment.address].floatTrigger -= parseInt payment.btc*exRate*100
@@ -81,7 +82,8 @@ que = (address)->
           beer(productData[address].gpioPin)
         , 12345*i
       setTimeout ->
-        logger.info ":::Payout Complete:::"
+        logger.info ":::Payout Complete:::new trigger:#{productData[address].floatTrigger}"
+        logger.info ":::new trigger on #{address} = #{productData[address].floatTrigger}  :::"
         inUse = false
       , 12345*i
 
