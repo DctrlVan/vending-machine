@@ -32,7 +32,7 @@ beer = (pin)->
     if err? then logger.info err
     setTimeout ->
       beered.write 0
-    , 5000
+    , 2222
 
 ###
 Explaination of pay and que functions :::
@@ -48,7 +48,7 @@ Explaination of pay and que functions :::
 ###
 pay = (payment,exRate)->
   if productData[payment.address]?
-    logger.info "#{payment.btc}btc to #{payment.address}"
+    logger.info "#{payment.btc}btc:#{payment.address}"
     if ((payed_txid.indexOf payment.txid) == -1)
       payed_txid.push payment.txid
       productData[payment.address].floatTrigger -= parseInt payment.btc*exRate*100
@@ -82,8 +82,8 @@ que = (address)->
           beer(productData[address].gpioPin)
         , 12345*i
       setTimeout ->
-        logger.info ":::Payout Complete:::new trigger:#{productData[address].floatTrigger}"
-        logger.info ":::new trigger on #{address} = #{productData[address].floatTrigger}  :::"
+        logger.info ":::Payout Complete:::"
+        logger.info ":::new trigger #{productData[address].floatTrigger} cents"
         inUse = false
       , 12345*i
 
