@@ -2,7 +2,12 @@
 winston = require 'winston'
 
 textFormat = (args)->
-  args.message + "    |    " + Date()
+  l = args.message.length
+  spaces= ""
+  while l < 55
+    spaces+=" "
+    l++
+  args.message + spaces + Date()
 
 textLogger = new winston.Logger
   transports: [
@@ -10,7 +15,7 @@ textLogger = new winston.Logger
       json:false
       formatter:textFormat
     new winston.transports.File
-      filename:"/home/pi/log/logs.txt"
+      filename: __dirname + "/logs.txt"
       json:false
       formatter:textFormat
   ]
