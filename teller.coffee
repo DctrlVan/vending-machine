@@ -56,6 +56,7 @@ pay = (payment,exRate)->
         productData[payment.address].floatTrigger += productData[payment.address].price
         productData[payment.address].que += 1
         if productData[payment.address].floatTrigger >= 0
+          console.log "passing to que"
           que(payment.address)
 
 ###

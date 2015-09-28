@@ -4,11 +4,8 @@ request = require 'request'
 blockchain = require 'blockchain.info'
 blockexplorer = blockchain.blockexplorer;
 
-
-
 checkUnconfirmed = (address, callback)->
   blockexplorer.getUnconfirmedTx (err,txs)->
-    console.log txs
     for transaction in txs.txs
       for key,value of transaction
         if key=='out'
@@ -20,14 +17,12 @@ checkUnconfirmed = (address, callback)->
                 value: outDoc.value
               );
 
-
-
-
-
 module.exports = ()->
+  console.log "checking UTXO"
   checkUnconfirmed  "16RyYkFi7fkqFD9KP6NdYcSsZj77EHABaf" , (err, payDoc)->
+    console.log "requesting #{payDoc}"
     request.post paymentUrl
       .form
         txid:payDoc.txid
         address:payDoc.address
-        btc:payDoc.value
+        btc:payDoc.value/100000000
