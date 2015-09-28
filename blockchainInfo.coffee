@@ -1,0 +1,1 @@
+blockchain = require 'blockchain.info'

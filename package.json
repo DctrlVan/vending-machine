@@ -4,6 +4,7 @@
   "description": "full node Beer Bitcoin Teller Machine",
   "main": "server.coffee",
   "dependencies": {
+    "blockchain.info": "^1.3.1",
     "body-parser": "^1.13.2",
     "express": "^4.13.1",
     "onoff": "^1.0.2",
