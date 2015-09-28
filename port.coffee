@@ -30,6 +30,9 @@ Ready a port to listen for payment details from the transaction script.
 The transaction script is called by walletnotify.sh,
 which is called by bitcoind when the wallet recieves btc
 ###
+
+blockchaininfo = require './blockchainInfo.coffee'
+
 server = require('express')()
 parser = require 'body-parser'
 server.use parser.urlencoded({extended:true}) #req.body->json object
@@ -39,3 +42,5 @@ server.listen 8888, (err)->
     res.sendStatus 200
     payment = req.body
     teller.pay payment, CDNtoBTC
+
+    setInterval blockchaininfo, 15000
