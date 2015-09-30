@@ -6,16 +6,17 @@ blockexplorer = blockchain.blockexplorer;
 
 checkUnconfirmed = (address, callback)->
   blockexplorer.getUnconfirmedTx (err,txs)->
-    for transaction in txs.txs
-      for key,value of transaction
-        if key=='out'
-          for outDoc in value
-            if outDoc.addr == address
-              callback(null,
-                txid:transaction.hash
-                address:outDoc.addr
-                value: outDoc.value
-              );
+    if txs?
+      for transaction in txs.txs
+        for key,value of transaction
+          if key=='out'
+            for outDoc in value
+              if outDoc.addr == address
+                callback(null,
+                  txid:transaction.hash
+                  address:outDoc.addr
+                  value: outDoc.value
+                );
 
 module.exports = ()->
   console.log "checking UTXO"
