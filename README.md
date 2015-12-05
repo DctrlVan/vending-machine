@@ -1,27 +1,16 @@
- Setup Instructions:
+# Vending Machine Code
 
-Install bitcoind.
-Target the walletnotify.sh script in the bitcoin.conf file.
+File descriptions:
+- *products.coffee* is a configuration file that describes the content, price and recieving btc address for vending.
+- *vending-machine.coffee* initiates the intervals that watch the exchange rate and the unconfirmed transaction set.
+- *blockchainInfo.coffee* watches the for new transactions in blockchain.info's utxo set.
+- *quadrigacx.coffee* calls out to quadrigas exchange price api
+- *teller.coffee* manages the dispense of the products.
 
-#### example /.bitcoin/bitcoin.conf:
-rpcuser=bitcoinrpc      
-rpcpassword=EPas8odfh993fjdslihf329985kjfldkmfM5      
-minrelaytxfee=0.00005     
-limitfreerelay=5     
-walletnotify=/home/pi/bbtm/walletnotify.sh %s       
 
-The walletnotify.sh script also needs to be configured so the
-dir is targeting its directory
-
-#### Currently Not Connected to Pi
-Beer function in teller should trigger gpio pins, but for now just console.log message. 
-
-## To test:
-#### Run Port
-`npm install coffee-script -g`   
-`npm install`   
-`coffee port.coffee`   
-
-#### Run Bitcoind and trigger transactions
-`bitcoind -regtest -daemon`     
-`bitcoin-cli -regtest sendtoaddress mhGxDcqDTVZf5tM696RYSm7RhsyfSqM12h <btcvalue>`    
+#### Possible Improvement List:
+- Add more services that watch the utxo set.
+- Create a local full node (bitcored is the likely candidate) to query for transactions.
+- Watch for double-spends / confirm confirmations.
+- Add web interface to allow purchase and reciept of vending tokens.
+- Rig machine to dispense automatically. 
