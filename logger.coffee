@@ -7,7 +7,9 @@ textFormat = (args)->
   while l < 55
     spaces+=" "
     l++
-  args.message + spaces + Date()
+  date = Date()
+  date = date[16..24] + date[0..9]
+  args.message + spaces + date
 
 textLogger = new winston.Logger
   transports: [
@@ -15,9 +17,16 @@ textLogger = new winston.Logger
       json:false
       formatter:textFormat
     new winston.transports.File
-      filename: __dirname + "/logs.txt"
+      name: 'overview'
+      filename: __dirname + "/logs/logs.txt"
       json:false
       formatter:textFormat
+      level:'info'
+    new winston.transports.File
+      name: 'details'
+      filename: __dirname + "/logs/debug.txt"
+      json:true
+      level:'debug'
   ]
 
 module.exports = textLogger
