@@ -1,45 +1,39 @@
-###
-This file listens for communication from Bitcoind
-It stores the exchange rate info.
-###
-teller = require './teller.coffee'
-###
-Log to log file, and console
-###
-logger = require('./log/logger.coffee').textLogger
 
-logger.info ':::starting up:::'
+teller = require './teller.coffee'
+log = require('./logger.coffee')
+blockchaininfo = require './blockchainInfo.coffee'
+
+server = require('express')()
+parser = require 'body-parser'
+server.use parser.urlencoded({extended:true})
+
+log.info ':::starting up:::'
+
 ###
 Keep exchange rate up to date by
 periodically asking quadriga.
 ###
-
 exchange = require './quadrigacx.coffee'
 CDNtoBTC = 0
 setRate = (err,rate)->   #this is callback function
-  if err
-    logger.info "setting rate error: #{err}"
-    CDNtoBTC = 380
+  return log.error "setting rate error: #{err}" if err?
   CDNtoBTC = rate
-  logger.info "Rate updated: $#{rate}/btc"
+  log.info "Rate updated: $#{rate}/btc"
+
+# Get rate on startup
 exchange.getAvgCDN setRate
-setInterval exchange.getAvgCDN, 7777777, setRate #update every~~ 2 hours
 
-###
-Ready a port to listen for payment details from the transaction script.
-The transaction script is called by walletnotify.sh,
-which is called by bitcoind when the wallet recieves btc
-###
-
-blockchaininfo = require './blockchainInfo.coffee'
-server = require('express')()
-parser = require 'body-parser'
-server.use parser.urlencoded({extended:true}) #req.body->json object
 server.listen 8888, (err)->
-  logger.info "node server hwaiting"
-  setInterval blockchaininfo, 15000
-  server.post '/payment', (req,res)->
-    res.sendStatus 200
-    payment = req.body
-    console.log "passing to teller"
-    teller.pay payment, CDNtoBTC
+  return log.error "Server error: #{err}" if err?
+  log.info "node server hwaiting"
+
+  ###
+  # Intervals poll for exchange rate and transactions.
+  ###
+  setInterval exchange.getAvgCDN, 7777777, setRate #update exchange rate every~~ 2 hours
+  setInterval blockchaininfo, 15000 # poll utxo every 15 seconds
+
+  ###
+  # Listen for payment on /payment, pass to teller pay function:
+  ###
+  server.post '/payment', (req,res)->  teller req.body, CDNtoBTC

@@ -1,6 +1,8 @@
 module.exports =[
-  name:'CurrentATM'
-  address: "16RyYkFi7fkqFD9KP6NdYcSsZj77EHABaf"
+  {
+  name:'All Drinks'
+  address: "1x8tkeQaLRPRLHVt7LxagvTDoUDDKQZxb"
   price : 299
   gpioPin: 17
+  }
 ]

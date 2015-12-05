@@ -20,4 +20,4 @@ textLogger = new winston.Logger
       formatter:textFormat
   ]
 
-module.exports = { textLogger }
+module.exports = textLogger

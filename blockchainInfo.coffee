@@ -1,3 +1,4 @@
+log = require './logger.coffee'
 paymentUrl = 'http://localhost:8888/payment'
 request = require 'request'
 
@@ -18,9 +19,10 @@ checkUnconfirmed = (address, callback)->
                   value: outDoc.value
                 );
 
+
 module.exports = ()->
   console.log "checking UTXO"
-  checkUnconfirmed  "16RyYkFi7fkqFD9KP6NdYcSsZj77EHABaf" , (err, payDoc)->
+  checkUnconfirmed  "1x8tkeQaLRPRLHVt7LxagvTDoUDDKQZxb" , (err, payDoc)->
     console.log "requesting #{payDoc}"
     request.post paymentUrl
       .form
