@@ -1,4 +1,4 @@
-#gpio = require('onoff').Gpio
+gpio = require('onoff').Gpio
 log = require './logger.coffee'
 products = require './products.coffee'
 
@@ -29,14 +29,12 @@ dispense = (pin)->
   # The beered variable represents an 'out' pin on the raspberry pi.
   # When we write 1 to the pin it is on (light flashing, button active)
   ###
-  ###
   beered = new gpio(pin,'out')
   beered.write 1, (err)->
     if err? then log.info err
     setTimeout ->
       beered.write 0
     , 2222
-  ###
 ###
 # que function handles the timing of the payouts. Ensures payments at the same time
 # are handled, and the bulk ('rounds') are dispensed one at a time.
