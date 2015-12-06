@@ -58,7 +58,7 @@ que = (address)->
 
   setTimeout ->
     log.info "Payout Complete:::new trigger #{productData[address].floatTrigger} cents"
-    inUse = no1
+    inUse = no
   , 12345*i
 
 ###
