@@ -10,7 +10,7 @@ File descriptions:
 
 #### Possible Improvement List:
 - Add more services that watch the utxo set.
-- Create a local full node (bitcored is the likely candidate) to query for transactions.
+- Create a local network full node (bitcored is the likely candidate) to query for transactions.
 - Watch for double-spends / confirm confirmations.
 - Add web interface to allow purchase and reciept of vending tokens.
-- Rig machine to dispense automatically. 
+- Rig machine to dispense automatically.
