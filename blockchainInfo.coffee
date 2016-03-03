@@ -15,7 +15,7 @@ checkUnconfirmed = (callback)->
   blockexplorer.getUnconfirmedTx (err, txs)->
     log.debug "response recieved from blockexplorer"
     if err
-      log.error err
+      log.error 'Error from get Unconfirmed', err
       return callback null
     # loop through all unconfirmed transactions.
     for transaction in txs.txs

@@ -5,7 +5,11 @@ avgCDNUrl = 'https://api.quadrigacx.com/v2/ticker'
 request = require 'request'
 getAvgCDN = (callback)->
   request avgCDNUrl,(err,res,body)->
-    callback null, (JSON.parse body).vwap
+    try
+      parsed = JSON.parse body
+    catch
+      return callback 'Parse Error'
+    callback null, parsed.vwap
 
 module.exports = { getAvgCDN }
 
