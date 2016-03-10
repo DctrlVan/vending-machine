@@ -4,10 +4,12 @@ log = require('./logger.coffee')
 blockchaininfo = require './blockchainInfo.coffee'
 
 log.info ':::starting up:::'
+process.on 'uncaughtException', (err)-> log.error err
 
 ###
 # Keep exchange rate up to date.
 ###
+
 exchange = require './quadrigacx.coffee'
 CDNtoBTC = 0
 setRate = (err,rate)->   #this is callback function
